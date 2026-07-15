@@ -1,0 +1,53 @@
+{
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "C/C++: cl.exe 활성 파일 빌드",
+      "command": "cl.exe",
+      "args": [
+        "/Zi",
+        "/EHsc",
+        "/nologo",
+        "/std:c++17",
+        "/Fe${fileDirname}\\${fileBasenameNoExtension}.exe",
+        "${file}"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": ["$msCompile"],
+      "detail": "디버거에서 생성된 작업입니다."
+    },
+    {
+      "type": "cppbuild",
+      "label": "C/C++: textrpg 전체 빌드",
+      "command": "cl.exe",
+      "args": [
+        "/Zi",
+        "/EHsc",
+        "/nologo",
+        "/std:c++17",
+        "/Fe${workspaceFolder}\\textrpg.exe",
+        "${workspaceFolder}\\textrpg.cpp",
+        "${workspaceFolder}\\GameManagement\\*.cpp",
+        "${workspaceFolder}\\Player\\*.cpp",
+        "${workspaceFolder}\\Player\\Job\\*.cpp",
+        "${workspaceFolder}\\Monster\\*.cpp",
+        "${workspaceFolder}\\AlchemyWorkshop\\*.cpp",
+        "${workspaceFolder}\\Inventory\\*.cpp",
+        "${workspaceFolder}\\Item\\*.cpp",
+        "${workspaceFolder}\\Item\\Potion\\*.cpp"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$msCompile"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "textrpg 프로젝트의 모든 소스 파일을 컴파일/링크합니다."
+    }
+  ],
+  "version": "2.0.0"
+}
