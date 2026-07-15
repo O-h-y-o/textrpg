@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
-
-using namespace std;
+#include <string>
 
 class WorkshopManagement {
 private:
@@ -12,6 +11,6 @@ public:
     int showWorkshopMenu();
     void ControlWorkshopMenu(int choice);
     void showAllRecipes();
-    void searchRecipeByName(string target);
-    void searchRecipeByIngredient(string target);
+    void searchRecipeByName(std::string target);
+    void searchRecipeByIngredient(std::string target);
 };

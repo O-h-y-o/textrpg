@@ -1,12 +1,13 @@
 #pragma once
 #include <string>
-using namespace std;
+#include "../Item/Material/MaterialInfo.h"
 
 struct MonsterInfo {
-    string name, dropItemName;
-    int hp, ap, dp, dropItemPrice;
+    std::string name;
+    int hp, ap, dp;
+    DropItemType dropItemType;
 };
 
-const MonsterInfo SLIME_INFO = {"슬라임", "끈적한 젤리", 100, 20, 10, 50};
-const MonsterInfo GOBLIN_INFO = {"고블린", "고블린 가죽", 80, 20, 20, 70};
-const MonsterInfo WOLF_INFO = {"늑대", "늑대 가죽", 70, 25, 15, 70};
+const MonsterInfo SLIME_INFO = {"슬라임", 100, 20, 10, DropItemType::DROP_ITEM_SLIME};
+const MonsterInfo GOBLIN_INFO = {"고블린",  80, 20, 20, DropItemType::DROP_ITEM_GOBLIN};
+const MonsterInfo WOLF_INFO = {"늑대", 70, 25, 15, DropItemType::DROP_ITEM_WOLF};

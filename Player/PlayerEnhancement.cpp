@@ -1,57 +1,48 @@
 #include "PlayerEnhancement.h"
 #include <iostream>
-using namespace std;
+
+PlayerEnhancement::PlayerEnhancement(PlayerStatus& hs, PlayerInventory& hi) : playerStatus(hs), playerInventory(hi), potion(hi, hs) {};
 
 void PlayerEnhancement::controlEnhancement() {
     while(true) {
-        cout << "< 캐릭터 강화 >\n";
-        cout << "1. HP UP    2. MP UP     3. 공격력 2배\n";
-        cout << "4. 방어력 2배   5. 현재 능력치   0. 게임 시작\n";
-        cout << "===================================\n";
+        std::cout << "< 캐릭터 강화 >\n";
+        std::cout << "1. HP 소형 포션 사용    2. MP 소형 포션 사용     3. 공격력 2배\n";
+        std::cout << "4. 방어력 2배   5. 현재 능력치 확인   0. 게임 시작\n";
+        std::cout << "===================================\n";
 
-        cout << "번호를 선택해주세요: ";
+        std::cout << "번호를 선택해주세요: ";
         int selectNum;
-        cin >> selectNum;
-        cout << "\n";
+        std::cin >> selectNum;
 
         switch (selectNum) {
-            bool canUse;
             case 0:
                 break;
             case 1: {
-                StatusType hp = StatusType::HP;
-                canUse = playerInventory.canUsePotion(hp);
-                if(canUse) {
-                    playerInventory.usePotion(hp);
-                    StatModifier plusHP{plus<int>(), playerInventory.getPotionEffect(hp)};
-                    playerStatus.controlPlayerStatus(hp, plusHP);
-                }
-
+                std::cout << "사용할 HP 소형 포션 개수를 입력해주세요: ";
+                int count;
+                std::cin >> count;
+                potion.use(HP_POTION_SMALL.itemName, count);
                 break;
             }
             case 2: {
-                StatusType mp = StatusType::MP;
-                canUse = playerInventory.canUsePotion(mp);
-                if(canUse) {
-                    playerInventory.usePotion(mp);
-                    StatModifier plusMP{plus<int>(), playerInventory.getPotionEffect(mp)};
-                    playerStatus.controlPlayerStatus(mp, plusMP);
-                }
-
+                std::cout << "사용할 MP 소형 포션 개수를 입력해주세요: ";
+                int count;
+                std::cin >> count;
+                potion.use(MP_POTION_SMALL.itemName, count);
                 break;
             }
             case 3: {
-                StatModifier multipliesAP{multiplies<int>(), 2};
+                StatModifier multipliesAP{std::multiplies<int>(), 2};
                 playerStatus.controlPlayerStatus(StatusType::AP, multipliesAP);
                 break;
             }
             case 4: {
-                StatModifier multipliesDP{multiplies<int>(), 2};
+                StatModifier multipliesDP{std::multiplies<int>(), 2};
                 playerStatus.controlPlayerStatus(StatusType::DP, multipliesDP);
                 break;
             }
             case 5: {
-                playerStatus.printHereStatus();
+                playerStatus.printPlayerStatus();
                 break;
             }
         }

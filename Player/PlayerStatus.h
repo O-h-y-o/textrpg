@@ -2,19 +2,18 @@
 #include <string>
 #include <iostream>
 #include "../Types.h"
-using namespace std;
 
 class PlayerStatus {
 private:
-    const string heroName;
+    const std::string playerName;
     Status stat;
 
 public:
-    explicit PlayerStatus(string heroName) : heroName(heroName) {};
+    explicit PlayerStatus(std::string playerName) : playerName(playerName) {};
 
-    void inputPlayerStatus(istream& in);
+    void inputPlayerStatus(std::istream& in);
     void controlPlayerStatus(StatusType st, const StatModifier& modi);
-    void printHereStatus();
-    string getHeroName();
+    void printPlayerStatus();
+    std::string getPlayerName();
     Status getStatus();
 };

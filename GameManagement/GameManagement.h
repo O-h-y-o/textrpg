@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
-
-using namespace std;
+#include <memory>
 
 class Player;
 class WorkshopManagement;
@@ -10,7 +9,7 @@ class GameManagement {
 private:
     bool isGameStart = false;
     Player* player = nullptr;
-    unique_ptr<WorkshopManagement> wm;
+    std::unique_ptr<WorkshopManagement> wm;
 
 public:
     GameManagement(Player* player);

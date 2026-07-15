@@ -1,22 +1,22 @@
 #pragma once
 #include <map>
 #include <string>
+#include <optional>
 #include "../Types.h"
-using namespace std;
+#include "../ErrorCodes.h"
 
 class PlayerInventory {
 private:
     Inventory inventory;
+    int maxCapacity;
 
 public:
     PlayerInventory();
 
     int getTotalItemCount() const;
-    bool canUsePotion(StatusType st);
-    void setPotion(StatusType st, int count);
-    void usePotion(StatusType st);
-    int getPotionEffect(StatusType st);
-    void addInventory(InventoryItem setItemValue);
-    Inventory getInventory();
-    void showInventory();
+    std::optional<InventoryItem> getItem(const std::string& itemName) const;
+    void addItem(const InventoryItem setItemValue);
+    RemoveItemResult removeItem(const std::string& itemName, const int& count);
+    Inventory getInventory() const;
+    void showInventory() const;
 };

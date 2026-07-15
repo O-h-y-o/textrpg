@@ -9,41 +9,41 @@
 #include "Player/Job/Thief.h"
 #include "Player/Job/Archor.h"
 #include "GameManagement/GameManagement.h"
-using namespace std;
+#include <memory>
 
 int main() {
-    cout << "===================================\n";
-    cout << "  [던전 탈출 텍스트 RPG]\n";
-    cout << "===================================\n";
-    cout << "용사의 이름을 입력해주세요: ";
-    string inputName;
-    cin >> inputName;
+    std::cout << "===================================\n";
+    std::cout << "  [던전 탈출 텍스트 RPG]\n";
+    std::cout << "===================================\n";
+    std::cout << "용사의 이름을 입력해주세요: ";
+    std::string inputName;
+    std::cin >> inputName;
     PlayerStatus hs(inputName);
-    hs.inputPlayerStatus(cin);
-    hs.printHereStatus();
+    hs.inputPlayerStatus(std::cin);
+    hs.printPlayerStatus();
 
     PlayerInventory hi;
     PlayerEnhancement he(hs, hi);
     he.controlEnhancement();
 
-    cout << "< 전직 시스템 >\n";
-    cout << inputName << "님, 직업을 선택해주세요!\n";
-    cout << "1. 전사  2. 마법사  3. 도적  4. 궁수\n";
-    cout << "선택: ";
+    std::cout << "< 전직 시스템 >\n";
+    std::cout << inputName << "님, 직업을 선택해주세요!\n";
+    std::cout << "1. 전사  2. 마법사  3. 도적  4. 궁수\n";
+    std::cout << "선택: ";
 
     int selectJob;
 
-    unique_ptr<Player> player;
+    std::unique_ptr<Player> player;
 
     while (true) {
-        cin >> selectJob;
+        std::cin >> selectJob;
 
         switch(selectJob) {
-            case 1: player = make_unique<Warrior>(hs, hi); break;
-            case 2: player = make_unique<Mage>(hs, hi); break;
-            case 3: player = make_unique<Thief>(hs, hi); break;
-            case 4: player = make_unique<Archor>(hs, hi); break;
-            default: cout << "직업을 다시 선택해주세요: "; return 0;
+            case 1: player = std::make_unique<Warrior>(hs, hi); break;
+            case 2: player = std::make_unique<Mage>(hs, hi); break;
+            case 3: player = std::make_unique<Thief>(hs, hi); break;
+            case 4: player = std::make_unique<Archor>(hs, hi); break;
+            default: std::cout << "직업을 다시 선택해주세요: "; return 0;
         }
 
         if(selectJob > 0 && selectJob < 5) break;
@@ -51,7 +51,7 @@ int main() {
 
     player->printPlayerStatus();
 
-    unique_ptr<GameManagement> gm = make_unique<GameManagement>(player.get());
+    std::unique_ptr<GameManagement> gm = std::make_unique<GameManagement>(player.get());
 
     gm->gameStart();
 

@@ -36,7 +36,8 @@
         "${workspaceFolder}\\AlchemyWorkshop\\*.cpp",
         "${workspaceFolder}\\Inventory\\*.cpp",
         "${workspaceFolder}\\Item\\*.cpp",
-        "${workspaceFolder}\\Item\\Potion\\*.cpp"
+        "${workspaceFolder}\\Item\\Potion\\*.cpp",
+        "${workspaceFolder}\\Item\\Material\\*.cpp"
       ],
       "options": {
         "cwd": "${workspaceFolder}"

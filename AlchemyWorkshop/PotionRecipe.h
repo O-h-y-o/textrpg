@@ -1,19 +1,18 @@
 #pragma once
 #include <string>
 #include <vector>
-using namespace std;
 
 struct Ingredients {
-    string name;
+    std::string name;
     int amount;
 };
 
 struct PotionRecipe {
-    string name;
-    vector<Ingredients> ingredients;
+    std::string name;
+    std::vector<Ingredients> ingredients;
 };
 
-vector<PotionRecipe> recipes = {
+std::vector<PotionRecipe> recipes = {
     {
         "HP 포션",
         { {"허브", 1}, {"맑은물", 1} }

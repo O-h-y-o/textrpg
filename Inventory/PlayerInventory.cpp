@@ -1,12 +1,21 @@
 #include "PlayerInventory.h"
+#include "../Item/Potion/Potion.h"
 #include <iostream>
-using namespace std;
 
-PlayerInventory::PlayerInventory() {
-    cout << "* HP 포션 5개, MP 포션 5개가 기본 지급되었습니다.\n";
-    inventory["HP 포션"] = {"HP 포션", 5, 20, 50};
-    inventory["MP 포션"] = {"MP 포션", 5, 20, 50};
-    cout << "===================================\n";
+PlayerInventory::PlayerInventory() : maxCapacity(20) {
+    std::cout << "* HP 소형 포션 3개, MP 소형 포션 3개,\nAP 소형 포션 1개, DP 소형 포션 1개가 기본 지급되었습니다.\n";
+    InventoryItem hpPotion = HP_POTION_SMALL;
+    InventoryItem mpPotion = MP_POTION_SMALL;
+    InventoryItem apPotion = AP_POTION_SMALL;
+    InventoryItem dpPotion = DP_POTION_SMALL;
+    hpPotion.count = 3;
+    mpPotion.count = 3;
+    addItem(hpPotion);
+    addItem(mpPotion);
+    addItem(apPotion);
+    addItem(dpPotion);
+    showInventory();
+    std::cout << "===================================\n";
 }
 
 int PlayerInventory::getTotalItemCount() const {
@@ -17,57 +26,55 @@ int PlayerInventory::getTotalItemCount() const {
     return total;
 };
 
-bool PlayerInventory::canUsePotion(StatusType st) {
-    bool canUse = inventory[potionTypeToString(st)].count > 0;
-    if(!canUse) cout << "포션이 부족합니다.\n";
-    return canUse;
+std::optional<InventoryItem> PlayerInventory::getItem(const std::string& itemName) const {
+    auto it = inventory.find(itemName);
+    if(it != inventory.end()) {
+        return it->second;
+    } else {
+        return std::nullopt;
+    }
 }
 
-// void PlayerInventory::setPotion(StatusType st, int count) {
-//     inventory[potionTypeToString(st)].count += count;
-//     if(count < 0) {
-//         cout << statusTypeToString(st) << " 포션을 사용합니다. ";
-//     }  else {
-//         cout << statusTypeToString(st) << " 포션을 추가합니다. ";
-//     }
-//     cout << "현재 보유중인 " << statusTypeToString(st) << " 포션: " <<  inventory[potionTypeToString(st)].count << "개\n";
-// }
-
-// void PlayerInventory::usePotion(StatusType st) {
-//     setPotion(st, -1);
-// }
-
-// int PlayerInventory::getPotionEffect(StatusType st) {
-//     return inventory[potionTypeToString(st)].effect;
-// }
-
-void PlayerInventory::addInventory(InventoryItem setItemValue) {
+void PlayerInventory::addItem(const InventoryItem setItemValue) {
     if(getTotalItemCount() < 10) {
-        if(inventory.find(setItemValue.itemName) != inventory.end()) {
+        if(getItem(setItemValue.itemName)) {
             inventory[setItemValue.itemName].count += setItemValue.count;
         } else {
             inventory[setItemValue.itemName] = setItemValue;
         }
-        cout << "인벤토리에 저장되었습니다.\n";
+        std::cout << setItemValue.itemName <<" 이(가) " << setItemValue.count << "개 추가되었습니다.\n";
     } else {
-        cout << "인벤토리에 더 이상 보관할 수 없습니다.\n";
+        std::cout << "인벤토리에 더 이상 보관할 수 없습니다.\n";
     }
 }
 
-Inventory PlayerInventory::getInventory() {
+RemoveItemResult PlayerInventory::removeItem(const std::string& itemName, const int& count) {
+    if(getItem(itemName)) {
+        if(inventory[itemName].count < count) {
+            return RemoveItemResult::InsufficientCount;
+        } else {
+            inventory[itemName].count -= count;
+            return RemoveItemResult::Success;
+        }
+    } else { 
+        return RemoveItemResult::NotFound;
+    }
+}
+
+Inventory PlayerInventory::getInventory() const {
     return inventory;
 }
 
-void PlayerInventory::showInventory() {
+void PlayerInventory::showInventory() const {
     int itemTotalCount = 0;
     int count = 1;
-    cout << "********** 인벤토리 **********\n";
+    std::cout << "********** 인벤토리 **********\n";
     for(auto& item : inventory) {
         itemTotalCount += item.second.count;
-        cout << count << ". " << item.second.itemName;
-        cout << " (" << item.second.price << "G) ";
-        cout << item.second.count << "개\n";
+        std::cout << count << ". " << item.second.itemName;
+        std::cout << " (" << item.second.price << "G) ";
+        std::cout << item.second.count << "개\n";
         count++;
     }
-    cout << "*** 총 보유 수량 (" << itemTotalCount << "/10) ***\n\n";
+    std::cout << "*** 총 보유 수량 (" << itemTotalCount << "/" << maxCapacity << ")***\n\n";
 }

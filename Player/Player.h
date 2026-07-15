@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "PlayerStatus.h"
 #include "../Inventory/PlayerInventory.h"
 #include "../Types.h"
@@ -18,7 +19,7 @@ public:
 
     virtual void attack(Monster* monster) = 0;
     void printPlayerStatus();
-    void takeDamage(int damage, string monsterName);
+    void takeDamage(int damage, std::string monsterName);
     PlayerStatus getPlayerStatus();
     PlayerInventory getPlayerInventory();
     void obtainItem(InventoryItem setItemValue);

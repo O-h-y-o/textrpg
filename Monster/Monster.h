@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+#include <utility>
 #include "MonsterInfo.h"
 
 class Player;
@@ -14,5 +16,5 @@ public:
     virtual void attack(Player* player) = 0;
     void takeDamage(int damage);
     int getHP();
-    pair<string, int> getDropItem();
+    InventoryItem getDropItem();
 };
