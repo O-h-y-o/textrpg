@@ -17,4 +17,5 @@ public:
     void takeDamage(int damage);
     int getHP();
     InventoryItem getDropItem();
+    const int& getExp() const;
 };

@@ -94,7 +94,8 @@ void GameManagement::dungeon() {
     }
 
     if(player->getPlayerStatus().getStatus().hp > 0) {
-        player->obtainItem(monster->getDropItem());
+        player->getPlayerInventory().addItem(monster->getDropItem());
+        player->setPlayerExp(monster->getExp());
     } else {
         gameEnd();
     }

@@ -6,7 +6,7 @@
 #include <iostream>
 
 Player::Player(const std::string playerName, JobType job) : 
-playerStatus(std::make_unique<PlayerStatus>()), playerInventory(std::make_unique<PlayerInventory>()), playerName(playerName), job(job), level(1) {};
+playerStatus(std::make_unique<PlayerStatus>()), playerInventory(std::make_unique<PlayerInventory>()), playerName(playerName), job(job), level(1), exp(0) {};
 
 Player::~Player() {};
 
@@ -38,15 +38,22 @@ PlayerInventory& Player::getPlayerInventory() {
     return *playerInventory;
 }
 
-void Player::obtainItem(InventoryItem setItemValue) {
-    playerInventory->addItem(setItemValue);
-}
-
 const std::string& Player::getPlayerName() const { return playerName; }
 
 const JobType& Player::getPlayerJob() const { return job; }
 
 const int& Player::getPlayerLevel() const { return level; }
 
+const int& Player::getPlayerExp() const { return exp; }
 
-void Player::setPlayerLevel() { level++; }
+void Player::setPlayerExp(int addExp) {
+    int sumExp = exp + addExp;
+    int needExp = expTable.at(level);
+    if(sumExp >= needExp) {
+        std::cout << "\n*** 레벨업! ***\n";
+        level++;
+        setPlayerExp(sumExp - needExp);
+    } else {
+        exp += addExp;
+    }
+}

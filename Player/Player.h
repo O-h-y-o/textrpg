@@ -10,6 +10,9 @@ class PlayerEnhancement;
 class PlayerInventory;
 class Potion;
 
+std::vector<int> expTable = {
+    0, 100, 200, 350, 500, 700, 850, 1000, 1300, 1600
+};
 
 class Player {
 protected:
@@ -19,6 +22,7 @@ protected:
     std::unique_ptr<PlayerInventory> playerInventory;
     JobType job;
     int level;
+    int exp;
 
 public:
     Player(const std::string playerName, JobType job);
@@ -32,7 +36,6 @@ public:
 
     PlayerEnhancement& getPlayerEnhancement();
     PlayerInventory& getPlayerInventory();
-    void obtainItem(InventoryItem setItemValue);
 
     // getter
     const std::string& getPlayerName() const;
@@ -41,5 +44,5 @@ public:
     const int& getPlayerExp() const;
 
     // setter
-    void setPlayerLevel();
+    void setPlayerExp(int addExp);
 };

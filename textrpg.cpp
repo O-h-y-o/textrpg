@@ -18,7 +18,6 @@ int main() {
     std::cout << "용사의 이름을 입력해주세요: ";
     std::string inputName;
     std::cin >> inputName;
-
     
     std::cout << "\n" << inputName << "님, 직업을 선택해주세요!\n";
     std::cout << "1. 전사  2. 마법사  3. 도적  4. 궁수\n";
@@ -40,23 +39,13 @@ int main() {
         if(selectJob > 0 && selectJob < 5) break;
     }
 
-    // player->getPlayerStatus().inputPlayerStatus();
-
     player->printPlayerStatus();
 
-    std::unique_ptr<GameManagement> gm = std::make_unique<GameManagement>(player.get());
+    std::unique_ptr<GameManagement> gm = std::make_unique<GameManagement>(player);
 
     gm->gameStart();
 
     gm->showMainMenu();
 
-    // PlayerStatus hs(inputName);
-    // hs.inputPlayerStatus(std::cin);
-    // hs.printPlayerStatus();
-
-    // PlayerInventory hi;
-    // PlayerEnhancement he(hs, hi);
-    // he.controlEnhancement();
-     
     return 0;
 };
