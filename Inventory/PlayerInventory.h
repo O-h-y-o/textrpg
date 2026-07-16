@@ -5,13 +5,18 @@
 #include "../Types.h"
 #include "../ErrorCodes.h"
 
+class Potion;
+
 class PlayerInventory {
 private:
     Inventory inventory;
     int maxCapacity;
+    Potion* potion = nullptr;
 
 public:
     PlayerInventory();
+
+    void setPotion(Potion& potion);
 
     int getTotalItemCount() const;
     std::optional<InventoryItem> getItem(const std::string& itemName) const;

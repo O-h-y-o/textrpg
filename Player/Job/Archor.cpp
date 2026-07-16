@@ -13,5 +13,8 @@ Archor::Archor(const std::string playerName) : Player(playerName, JobType::Archo
 void Archor::attack(Monster* monster) {
     std::cout << "* 활을 쏜다!\n";
     
-    monster->takeDamage(playerStatus->getStatus().ap);
+    int split = 3;
+    for(int i = 0; i < split; i++) {
+        monster->takeDamage(playerStatus->getStatus().ap / split);
+    }
 }

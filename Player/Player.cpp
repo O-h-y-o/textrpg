@@ -3,10 +3,14 @@
 #include "PlayerStatus.h"
 #include "PlayerEnhancement.h"
 #include "../Inventory/PlayerInventory.h"
+#include "../Item/Potion/Potion.h"
 #include <iostream>
 
-Player::Player(const std::string playerName, JobType job) : 
-playerStatus(std::make_unique<PlayerStatus>()), playerInventory(std::make_unique<PlayerInventory>()), playerName(playerName), job(job), level(1), exp(0) {};
+Player::Player(const std::string playerName, JobType job) :
+playerStatus(std::make_unique<PlayerStatus>()), playerInventory(std::make_unique<PlayerInventory>()), playerName(playerName), job(job), level(1), exp(0) {
+    potion = std::make_unique<Potion>(*playerInventory, *playerStatus);
+    playerInventory->setPotion(*potion);
+};
 
 Player::~Player() {};
 
@@ -15,8 +19,7 @@ void Player::takeDamage(int damage, std::string monsterName) {
     Status* stat = &playerStatus->getStatus();
     int takeDamage = damage - stat->dp;
     if(takeDamage < 1) takeDamage = 1;
-    StatModifier minusHP{std::minus<int>(), takeDamage};
-    playerStatus->controlPlayerStatus(StatusType::HP, minusHP);
+    playerStatus->plusPlayerStatus(StatusType::HP, -takeDamage);
     if(playerStatus->getStatus().hp <= 0) {
         std::cout << "@@플레이어 사망@@\n";
     }
@@ -52,7 +55,12 @@ void Player::setPlayerExp(int addExp) {
     if(sumExp >= needExp) {
         std::cout << "\n*** 레벨업! ***\n";
         level++;
+        exp = 0;
         setPlayerExp(sumExp - needExp);
+        std::cout << "HP +10, MP +5, Attack +5\n";
+        playerStatus->plusPlayerStatus(StatusType::HP, 10);
+        playerStatus->plusPlayerStatus(StatusType::MP, 5);
+        playerStatus->plusPlayerStatus(StatusType::AP, 5);
     } else {
         exp += addExp;
     }

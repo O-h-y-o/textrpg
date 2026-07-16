@@ -35,6 +35,11 @@ void PlayerStatus::inputPlayerStatus() {
     std::cout << "\n";
 }
 
+void PlayerStatus::plusPlayerStatus(StatusType st, const int& value) {
+    StatModifier plusValue{std::plus<int>(), value};
+    controlPlayerStatus(st, plusValue);
+}
+
 void PlayerStatus::controlPlayerStatus(StatusType st, const StatModifier& modi) {
     int Status::*statusType = statusMap.at(st);
     int before = stat.*statusType;
@@ -47,13 +52,15 @@ void PlayerStatus::controlPlayerStatus(StatusType st, const StatModifier& modi) 
     } else {
         std::cout << " 감소했습니다.";
     }
-    std::cout << " 현재 체력: " << after << "\n";
+    std::cout << " 현재 " << statusTypeToString(st) << ": " << after << "\n";
 }
 
 void PlayerStatus::printPlayerStatus(const Player& player) const {
     std::cout << "===================================\n";
-    std::cout << "닉네임: " << player.getPlayerName() << " | 직업: " << jobTypeToString(player.getPlayerJob()) << " | Lv." << player.getPlayerLevel() << '\n';
-    std::cout << "HP: " << stat.hp << " | MP: " << stat.mp << " | 공격력: " << stat.ap << " | 방어력: " << stat.ap << '\n';
+    std::cout << "닉네임: " << player.getPlayerName() << " | 직업: " << jobTypeToString(player.getPlayerJob()) 
+    << " | Lv." << player.getPlayerLevel() << " (" << player.getPlayerExp() 
+    << "/" << expTable.at(player.getPlayerLevel()) << ")\n";
+    std::cout << "HP: " << stat.hp << " | MP: " << stat.mp << " | 공격력: " << stat.ap << " | 방어력: " << stat.dp << '\n';
     std::cout << "===================================\n";
 }
 

@@ -20,6 +20,7 @@ protected:
     std::unique_ptr<PlayerStatus> playerStatus;
     std::unique_ptr<PlayerEnhancement> playerEnhancement;
     std::unique_ptr<PlayerInventory> playerInventory;
+    std::unique_ptr<Potion> potion;
     JobType job;
     int level;
     int exp;

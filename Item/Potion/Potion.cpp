@@ -5,10 +5,10 @@ Potion::Potion(PlayerInventory& inventory, PlayerStatus& status) : Item{inventor
 
 void Potion::use(const std::string& itemName, const int& count) {
     std::cout << "포션을 사용합니다.\n";
+    auto item = inventory.getItem(itemName);
     RemoveItemResult result = inventory.removeItem(itemName, count);
     switch (result) {
         case RemoveItemResult::Success : {
-            auto item = inventory.getItem(itemName);
             if(item->status.has_value()) {
                 StatModifier p{std::plus<int>(), (item->effect) * count};
                 status.controlPlayerStatus(item->status.value(), p);

@@ -31,15 +31,16 @@ void GameManagement::showMainMenu() {
     int choice;
     while(getIsGameStart()) {
         std::cout << "\n***** 메인 메뉴 *****\n";
-        std::cout << "1. 던전 입장\n";
-        std::cout << "2. 인벤토리 확인\n";
-        std::cout << "3. 포션 제작소 입장\n";
+        std::cout << "1. 던전\n";
+        std::cout << "2. 인벤토리\n";
+        std::cout << "3. 포션 제작소\n";
+        std::cout << "4. 내 정보\n";
         std::cout << "0. 게임 종료\n";
 
         std::cout << "선택: ";
         std::cin >> choice;
         std::cout << "\n";
-        if(choice >= 0 && choice <= 3) {
+        if(choice >= 0 && choice <= 4) {
             ControlMainMenu(choice);
         } else {
             std::cout << "다시 선택해주세요\n";
@@ -52,6 +53,7 @@ void GameManagement::ControlMainMenu(int choice) {
         case 1: dungeon(); break;
         case 2: player.getPlayerInventory().showInventory(); break;
         case 3: wm->showWorkshopMenu(); break;
+        case 4: player.getPlayerStatus().printPlayerStatus(player); break;
         case 0: gameEnd(); break;
         default:
             break;

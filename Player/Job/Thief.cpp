@@ -13,5 +13,8 @@ Thief::Thief(const std::string playerName) : Player(playerName, JobType::Thief) 
 void Thief::attack(Monster* monster) {
     std::cout << "* 표창을 던진다!\n";
     
-    monster->takeDamage(playerStatus->getStatus().ap);
+    int split = 5;
+    for(int i = 0; i < split; i++) {
+        monster->takeDamage(playerStatus->getStatus().ap / split);
+    }
 }
