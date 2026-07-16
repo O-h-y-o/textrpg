@@ -1,10 +1,11 @@
 #pragma once
 #include "../Player.h"
-#include "../../Monster/Monster.h"
+
+class Monster;
 
 class Warrior : public Player {
 public:
-    Warrior(PlayerStatus& hs, PlayerInventory& hi);
+    Warrior(const std::string playerName);
 
     void attack(Monster* monster) override;
 };

@@ -3,7 +3,7 @@
 #include <iostream>
 
 PlayerInventory::PlayerInventory() : maxCapacity(20) {
-    std::cout << "* HP 소형 포션 3개, MP 소형 포션 3개,\nAP 소형 포션 1개, DP 소형 포션 1개가 기본 지급되었습니다.\n";
+    std::cout << "* HP, MP 소형 포션 3개, AP, DP 소형 포션 1개, 소형 포션 1개가 기본 지급됩니다.\n";
     InventoryItem hpPotion = HP_POTION_SMALL;
     InventoryItem mpPotion = MP_POTION_SMALL;
     InventoryItem apPotion = AP_POTION_SMALL;
@@ -14,7 +14,7 @@ PlayerInventory::PlayerInventory() : maxCapacity(20) {
     addItem(mpPotion);
     addItem(apPotion);
     addItem(dpPotion);
-    showInventory();
+    // showInventory();
     std::cout << "===================================\n";
 }
 

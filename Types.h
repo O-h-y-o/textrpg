@@ -54,7 +54,7 @@ static const std::map<StatusType, int Status::*> statusMap = {
 //     return "";
 // }
 
-inline std::string jobTypeToString(JobType& jt) {
+inline std::string jobTypeToString(const JobType& jt) {
     switch(jt) {
         case JobType::Warrior: return "전사";
         case JobType::Mage: return "마법사";

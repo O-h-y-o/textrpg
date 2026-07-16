@@ -3,17 +3,17 @@
 #include <iostream>
 #include "../Types.h"
 
+class Player;
+
 class PlayerStatus {
 private:
-    const std::string playerName;
     Status stat;
 
 public:
-    explicit PlayerStatus(std::string playerName) : playerName(playerName) {};
+    PlayerStatus();
 
-    void inputPlayerStatus(std::istream& in);
+    void inputPlayerStatus();
     void controlPlayerStatus(StatusType st, const StatModifier& modi);
-    void printPlayerStatus();
-    std::string getPlayerName();
-    Status getStatus();
+    void printPlayerStatus(const Player& player) const;
+    Status& getStatus();
 };

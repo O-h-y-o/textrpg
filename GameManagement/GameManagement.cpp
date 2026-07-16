@@ -1,5 +1,7 @@
 #include <random>
 #include "../Player/Player.h"
+#include "../Player/PlayerStatus.h"
+#include "../Inventory/PlayerInventory.h"
 #include "../GameManagement/GameManagement.h"
 #include "../AlchemyWorkshop/WorkshopManagement.h"
 #include "../Monster/Slime.h"

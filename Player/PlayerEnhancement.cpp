@@ -1,9 +1,11 @@
-#include "PlayerEnhancement.h"
 #include <iostream>
+#include "PlayerEnhancement.h"
+#include "Player.h"
+#include "../Item/Potion/Potion.h"
 
-PlayerEnhancement::PlayerEnhancement(PlayerStatus& hs, PlayerInventory& hi) : playerStatus(hs), playerInventory(hi), potion(hi, hs) {};
+PlayerEnhancement::PlayerEnhancement()  {};
 
-void PlayerEnhancement::controlEnhancement() {
+void PlayerEnhancement::controlEnhancement(Player& player, Potion& potion) {
     while(true) {
         std::cout << "< 캐릭터 강화 >\n";
         std::cout << "1. HP 소형 포션 사용    2. MP 소형 포션 사용     3. 공격력 2배\n";
@@ -33,16 +35,16 @@ void PlayerEnhancement::controlEnhancement() {
             }
             case 3: {
                 StatModifier multipliesAP{std::multiplies<int>(), 2};
-                playerStatus.controlPlayerStatus(StatusType::AP, multipliesAP);
+                player.getPlayerStatus().controlPlayerStatus(StatusType::AP, multipliesAP);
                 break;
             }
             case 4: {
                 StatModifier multipliesDP{std::multiplies<int>(), 2};
-                playerStatus.controlPlayerStatus(StatusType::DP, multipliesDP);
+                player.getPlayerStatus().controlPlayerStatus(StatusType::DP, multipliesDP);
                 break;
             }
             case 5: {
-                playerStatus.printPlayerStatus();
+                player.printPlayerStatus();
                 break;
             }
         }

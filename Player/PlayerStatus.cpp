@@ -1,13 +1,19 @@
 #include "PlayerStatus.h"
+#include "Player.h"
 #include <variant>
 #include <cstdlib>
 
-void PlayerStatus::inputPlayerStatus(std::istream& in) {
+PlayerStatus::PlayerStatus() {
+    inputPlayerStatus();
+}
+
+void PlayerStatus::inputPlayerStatus() {
+    std::cout << "\n초기 능력치를 세팅해주세요!\n";
     std::cout << "** HP와 MP의 최소치는 50, 최대치는 500입니다.\n";
 
     while (true) {
         std::cout << "HP와 MP를 입력해주세요: ";
-        in >> stat.hp >> stat.mp;
+        std::cin >> stat.hp >> stat.mp;
         if(stat.hp >= 50 && stat.hp <= 500 && stat.mp >= 50 && stat.mp <= 500) {
             break;
         } else {
@@ -19,7 +25,7 @@ void PlayerStatus::inputPlayerStatus(std::istream& in) {
 
     while (true) {
         std::cout << "공격력과 방어력를 입력해주세요: ";
-        in >> stat.ap >> stat.dp;
+        std::cin >> stat.ap >> stat.dp;
         if(stat.ap >= 20 && stat.ap <= 200 && stat.dp >= 20 && stat.dp <= 200) {
             break;
         } else {
@@ -44,18 +50,13 @@ void PlayerStatus::controlPlayerStatus(StatusType st, const StatModifier& modi) 
     std::cout << " 현재 체력: " << after << "\n";
 }
 
-void PlayerStatus::printPlayerStatus() {
+void PlayerStatus::printPlayerStatus(const Player& player) const {
     std::cout << "===================================\n";
-    std::cout << playerName << "의 현재 능력치\n";
-    std::cout << "HP: " << stat.hp << "    " << "MP: " << stat.mp << "\n";
-    std::cout << "공격력: " << stat.ap << "    " << "방어력: " << stat.dp << "\n";
+    std::cout << "닉네임: " << player.getPlayerName() << " | 직업: " << jobTypeToString(player.getPlayerJob()) << " | Lv." << player.getPlayerLevel() << '\n';
+    std::cout << "HP: " << stat.hp << " | MP: " << stat.mp << " | 공격력: " << stat.ap << " | 방어력: " << stat.ap << '\n';
     std::cout << "===================================\n";
 }
 
-std::string PlayerStatus::getPlayerName() {
-    return playerName;
-}
-
-Status PlayerStatus::getStatus() {
+Status& PlayerStatus::getStatus() {
     return stat;
 }
