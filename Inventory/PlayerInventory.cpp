@@ -1,20 +1,8 @@
 #include "PlayerInventory.h"
 #include "../Item/Potion/Potion.h"
+#include "../Utils/Input.h"
 #include <iostream>
 #include <limits>
-
-namespace {
-    bool readInt(int& value) {
-        std::cin >> value;
-        if (std::cin.fail()) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "잘못 입력하셨습니다.\n";
-            return false;
-        }
-        return true;
-    }
-}
 
 PlayerInventory::PlayerInventory() : maxCapacity(20) {
     std::cout << "* HP, MP 소형 포션 3개, AP, DP 소형 포션 1개, 소형 포션 1개가 기본 지급됩니다.\n";
@@ -101,7 +89,7 @@ void PlayerInventory::showInventory() const {
 
         std::cout << "사용할 아이템 번호를 입력하세요: ";
         int useItemNumber;
-        if (!readInt(useItemNumber)) continue;
+        if (!readInput(useItemNumber)) continue;
 
         if(useItemNumber == 0) {
             break;
@@ -112,12 +100,12 @@ void PlayerInventory::showInventory() const {
 
                 int useCount;
                 std::cout << "사용할 아이템 개수를 입력하세요: ";
-                if (!readInt(useCount)) break;
+                if (!readInput(useCount)) break;
 
                 int isUse;
                 std::cout << it->first << "을(를) 사용하시겠습니까?\n";
                 std::cout << "0. 돌아가기  1. 사용하기  : ";
-                if (!readInt(isUse)) break;
+                if (!readInput(isUse)) break;
 
                 if(isUse == 1) {
                     if(it->second.itemCategory == ItemCategory::Potion) {

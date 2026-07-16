@@ -2,6 +2,7 @@
 #include "PlayerEnhancement.h"
 #include "Player.h"
 #include "../Item/Potion/Potion.h"
+#include "../Utils/Input.h"
 
 PlayerEnhancement::PlayerEnhancement()  {};
 
@@ -14,7 +15,7 @@ void PlayerEnhancement::controlEnhancement(Player& player, Potion& potion) {
 
         std::cout << "번호를 선택해주세요: ";
         int selectNum;
-        std::cin >> selectNum;
+        if (!readInput(selectNum)) continue;
 
         switch (selectNum) {
             case 0:
@@ -22,14 +23,14 @@ void PlayerEnhancement::controlEnhancement(Player& player, Potion& potion) {
             case 1: {
                 std::cout << "사용할 HP 소형 포션 개수를 입력해주세요: ";
                 int count;
-                std::cin >> count;
+                if (!readInput(count)) continue;
                 potion.use(HP_POTION_SMALL.itemName, count);
                 break;
             }
             case 2: {
                 std::cout << "사용할 MP 소형 포션 개수를 입력해주세요: ";
                 int count;
-                std::cin >> count;
+                if (!readInput(count)) continue;
                 potion.use(MP_POTION_SMALL.itemName, count);
                 break;
             }

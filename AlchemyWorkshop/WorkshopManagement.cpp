@@ -1,5 +1,6 @@
 #include "WorkshopManagement.h"
 #include "PotionRecipe.h"
+#include "../Utils/Input.h"
 #include <algorithm>
 #include <iterator>
 
@@ -14,7 +15,7 @@ int WorkshopManagement::showWorkshopMenu() {
         std::cout << "0. 돌아가기\n";
         std::cout << "선택: ";
 
-        std::cin >> choice;
+        if (!readInput(choice)) continue;
         std::cout << "\n";
         if(choice >= 0 && choice <= 3) {
             if(choice == 0) {

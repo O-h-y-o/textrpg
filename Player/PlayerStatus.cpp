@@ -1,5 +1,6 @@
 #include "PlayerStatus.h"
 #include "Player.h"
+#include "../Utils/Input.h"
 #include <variant>
 #include <cstdlib>
 
@@ -11,27 +12,13 @@ void PlayerStatus::inputPlayerStatus() {
     std::cout << "\n초기 능력치를 세팅해주세요!\n";
     std::cout << "** HP와 MP의 최소치는 50, 최대치는 500입니다.\n";
 
-    while (true) {
-        std::cout << "HP와 MP를 입력해주세요: ";
-        std::cin >> stat.hp >> stat.mp;
-        if(stat.hp >= 50 && stat.hp <= 500 && stat.mp >= 50 && stat.mp <= 500) {
-            break;
-        } else {
-            std::cout << "HP나 MP가 범위에서 벗어났습니다. 다시 입력해주세요.\n";
-        }
-    }
+    readRangedPair("HP와 MP를 입력해주세요: ", stat.hp, stat.mp, 50, 500,
+        "HP나 MP가 범위에서 벗어났습니다. 다시 입력해주세요.\n");
 
     std::cout << "** 공격력과 방어력의 최소치는 20, 최대치는 200입니다.\n";
 
-    while (true) {
-        std::cout << "공격력과 방어력를 입력해주세요: ";
-        std::cin >> stat.ap >> stat.dp;
-        if(stat.ap >= 20 && stat.ap <= 200 && stat.dp >= 20 && stat.dp <= 200) {
-            break;
-        } else {
-            std::cout << "공격력이나 방어력이 범위에서 벗어났습니다. 다시 입력해주세요.\n";
-        }
-    }
+    readRangedPair("공격력과 방어력를 입력해주세요: ", stat.ap, stat.dp, 20, 200,
+        "공격력이나 방어력이 범위에서 벗어났습니다. 다시 입력해주세요.\n");
     std::cout << "\n";
 }
 

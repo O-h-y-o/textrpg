@@ -4,9 +4,18 @@
 #include "../Inventory/PlayerInventory.h"
 #include "../GameManagement/GameManagement.h"
 #include "../AlchemyWorkshop/WorkshopManagement.h"
+#include "../Utils/Input.h"
 #include "../Monster/Slime.h"
 #include "../Monster/Goblin.h"
 #include "../Monster/Wolf.h"
+
+namespace {
+    template<typename T>
+    std::unique_ptr<Monster> spawnMonster(const MonsterInfo& info, const std::string& appearMessage) {
+        std::cout << appearMessage;
+        return std::make_unique<T>(info);
+    }
+}
 
 GameManagement::GameManagement(Player& player)
     : player(player), wm(std::make_unique<WorkshopManagement>()) {}
@@ -38,7 +47,7 @@ void GameManagement::showMainMenu() {
         std::cout << "0. 게임 종료\n";
 
         std::cout << "선택: ";
-        std::cin >> choice;
+        if (!readInput(choice)) continue;
         std::cout << "\n";
         if(choice >= 0 && choice <= 4) {
             ControlMainMenu(choice);
@@ -66,21 +75,9 @@ void GameManagement::dungeon() {
     std::uniform_int_distribution<int> dist(0, 2);
     int r = dist(rng);
     switch (r) {
-        case 0: {
-            monster = std::make_unique<Goblin>(GOBLIN_INFO);
-            std::cout << "고블린이 나타났다!";
-            break;
-        }
-        case 1: {
-            monster = std::make_unique<Slime>(SLIME_INFO);
-            std::cout << "슬라임이 나타났다!";
-            break;
-        }
-        case 2: {
-            monster = std::make_unique<Wolf>(WOLF_INFO);
-            std::cout << "늑대가 나타났다!";
-            break;
-        }
+        case 0: monster = spawnMonster<Goblin>(GOBLIN_INFO, "고블린이 나타났다!"); break;
+        case 1: monster = spawnMonster<Slime>(SLIME_INFO, "슬라임이 나타났다!"); break;
+        case 2: monster = spawnMonster<Wolf>(WOLF_INFO, "늑대가 나타났다!"); break;
         default:
             break;
     }

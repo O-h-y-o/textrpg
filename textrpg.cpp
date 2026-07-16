@@ -9,6 +9,7 @@
 #include "Player/Job/Thief.h"
 #include "Player/Job/Archor.h"
 #include "GameManagement/GameManagement.h"
+#include "Utils/Input.h"
 #include <memory>
 
 int main() {
@@ -26,7 +27,7 @@ int main() {
     std::unique_ptr<Player> player;
     int selectJob;
     while (true) {
-        std::cin >> selectJob;
+        if (!readInput(selectJob)) continue;
 
         switch(selectJob) {
             case 1: player = std::make_unique<Warrior>(inputName); break;
