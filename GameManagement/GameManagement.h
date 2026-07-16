@@ -8,11 +8,11 @@ class WorkshopManagement;
 class GameManagement {
 private:
     bool isGameStart = false;
-    Player* player = nullptr;
+    Player& player;
     std::unique_ptr<WorkshopManagement> wm;
 
 public:
-    GameManagement(Player* player);
+    GameManagement(Player& player);
     ~GameManagement();
 
     void gameStart();

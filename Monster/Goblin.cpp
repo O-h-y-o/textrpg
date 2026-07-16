@@ -4,8 +4,8 @@
 
 Goblin::Goblin(MonsterInfo mi) : Monster(mi) {};
 
-void Goblin::attack(Player* player) {
+void Goblin::attack(Player& player) {
     std::cout << "고블린이 공격합니다.\n";
-    player->takeDamage(mi.ap, mi.name);
+    player.takeDamage(mi.ap, mi.name);
 }
 

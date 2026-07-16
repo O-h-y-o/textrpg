@@ -10,7 +10,7 @@ class PlayerEnhancement;
 class PlayerInventory;
 class Potion;
 
-std::vector<int> expTable = {
+inline std::vector<int> expTable = {
     0, 100, 200, 350, 500, 700, 850, 1000, 1300, 1600
 };
 

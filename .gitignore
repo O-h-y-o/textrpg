@@ -1,0 +1,16 @@
+# 빌드 산출물
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.idb
+*.log
+
+# 임시 파일
+*.tmp
+*.user
+*.suo
+
+# 빌드 폴더
+/Debug/
+/Release/

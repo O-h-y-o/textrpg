@@ -5,5 +5,5 @@ class Goblin : public Monster {
 public:
     Goblin(MonsterInfo mi);
 
-    void attack(Player* player) override;
+    void attack(Player& player) override;
 };

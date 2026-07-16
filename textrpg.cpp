@@ -41,7 +41,7 @@ int main() {
 
     player->printPlayerStatus();
 
-    std::unique_ptr<GameManagement> gm = std::make_unique<GameManagement>(player);
+    std::unique_ptr<GameManagement> gm = std::make_unique<GameManagement>(*player);
 
     gm->gameStart();
 

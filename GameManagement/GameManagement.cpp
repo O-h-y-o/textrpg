@@ -8,7 +8,7 @@
 #include "../Monster/Goblin.h"
 #include "../Monster/Wolf.h"
 
-GameManagement::GameManagement(Player* player)
+GameManagement::GameManagement(Player& player)
     : player(player), wm(std::make_unique<WorkshopManagement>()) {}
 
 GameManagement::~GameManagement() = default;
@@ -50,7 +50,7 @@ void GameManagement::showMainMenu() {
 void GameManagement::ControlMainMenu(int choice) {
     switch (choice) {
         case 1: dungeon(); break;
-        case 2: player->getPlayerInventory().showInventory(); break;
+        case 2: player.getPlayerInventory().showInventory(); break;
         case 3: wm->showWorkshopMenu(); break;
         case 0: gameEnd(); break;
         default:
@@ -83,9 +83,9 @@ void GameManagement::dungeon() {
             break;
     }
 
-    while(player->getPlayerStatus().getStatus().hp > 0 && monster->getHP() > 0) {
+    while(player.getPlayerStatus().getStatus().hp > 0 && monster->getHP() > 0) {
         std::cout << "\n--- 플레이어 턴 ---\n";
-        player->attack(monster.get());
+        player.attack(monster.get());
 
         if(monster->getHP() > 0) {
             std::cout << "\n--- 몬스터 턴 ---\n";
@@ -93,9 +93,9 @@ void GameManagement::dungeon() {
         }
     }
 
-    if(player->getPlayerStatus().getStatus().hp > 0) {
-        player->getPlayerInventory().addItem(monster->getDropItem());
-        player->setPlayerExp(monster->getExp());
+    if(player.getPlayerStatus().getStatus().hp > 0) {
+        player.getPlayerInventory().addItem(monster->getDropItem());
+        player.setPlayerExp(monster->getExp());
     } else {
         gameEnd();
     }

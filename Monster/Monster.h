@@ -13,7 +13,7 @@ public:
     Monster(MonsterInfo mi);
     virtual ~Monster() {};
 
-    virtual void attack(Player* player) = 0;
+    virtual void attack(Player& player) = 0;
     void takeDamage(int damage);
     int getHP();
     InventoryItem getDropItem();
