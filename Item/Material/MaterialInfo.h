@@ -1,19 +1,44 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "../../Types.h"
 
 enum class DropItemType {
     DROP_ITEM_SLIME,
     DROP_ITEM_GOBLIN,
     DROP_ITEM_WOLF,
+    DROP_ITEM_ORC,
+    DROP_ITEM_HOBGOBLIN,
+    DROP_ITEM_DIREWOLF,
+    DROP_ITEM_OGRE,
+    DROP_ITEM_TROLL,
+    DROP_ITEM_WYVERN,
 };
 
-const InventoryItem SLIME_DROP = {"끈적한 젤리", 1, 0, 50, ItemCategory::Material};
-const InventoryItem GOBLIN_DROP = {"고블린 가죽", 1, 0, 100, ItemCategory::Material};
-const InventoryItem WOLF_DROP = {"늑대 가죽", 1, 0, 50, ItemCategory::Material};
+// 던전 1단계
+extern const InventoryItem SLIME_DROP;
+extern const InventoryItem GOBLIN_DROP;
+extern const InventoryItem WOLF_DROP;
 
-static const std::map<DropItemType, InventoryItem> dropItemMap = {
-    { DropItemType::DROP_ITEM_SLIME, SLIME_DROP },
-    { DropItemType::DROP_ITEM_GOBLIN, GOBLIN_DROP },
-    { DropItemType::DROP_ITEM_WOLF, WOLF_DROP },
+// 던전 2단계
+extern const InventoryItem ORC_DROP;
+extern const InventoryItem HOBGOBLIN_DROP;
+extern const InventoryItem DIREWOLF_DROP;
+
+// 던전 3단계
+extern const InventoryItem OGRE_DROP;
+extern const InventoryItem TROLL_DROP;
+extern const InventoryItem WYVERN_DROP;
+
+extern const std::map<DropItemType, InventoryItem> dropItemMap;
+
+enum class MaterialGroup {
+    None,
+    Dungeon1MonsterDrop,
+    Dungeon2MonsterDrop,
+    Dungeon3MonsterDrop,
 };
+
+extern inline std::string materialGroupToString(MaterialGroup group);
+
+extern const std::map<MaterialGroup, std::vector<std::string>> materialGroupItems;

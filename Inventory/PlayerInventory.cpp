@@ -42,7 +42,7 @@ std::optional<InventoryItem> PlayerInventory::getItem(const std::string& itemNam
 }
 
 void PlayerInventory::addItem(const InventoryItem setItemValue) {
-    if(getTotalItemCount() < 10) {
+    if(getTotalItemCount() < maxCapacity) {
         if(getItem(setItemValue.itemName)) {
             inventory[setItemValue.itemName].count += setItemValue.count;
         } else {
@@ -124,3 +124,4 @@ void PlayerInventory::showInventory() const {
         }
     }
 }
+

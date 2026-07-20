@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <map>
 #include "../../Types.h"
 
 enum class PotionType {
@@ -9,9 +10,13 @@ enum class PotionType {
     MP_POTION_MEDIUM
 };
 
-const InventoryItem HP_POTION_SMALL = {"HP 소형 포션", 1, 20, 50, ItemCategory::Potion, StatusType::HP};
-const InventoryItem HP_POTION_MEDIUM = {"HP 중형 포션", 1, 45, 100, ItemCategory::Potion, StatusType::HP};
-const InventoryItem MP_POTION_SMALL = {"MP 소형 포션", 1, 20, 50, ItemCategory::Potion, StatusType::MP};
-const InventoryItem MP_POTION_MEDIUM = {"MP 중형 포션", 1, 45, 100, ItemCategory::Potion, StatusType::MP};
-const InventoryItem AP_POTION_SMALL = {"AP 소형 포션", 1, 10, 150, ItemCategory::Potion, StatusType::AP};
-const InventoryItem DP_POTION_SMALL = {"DP 소형 포션", 1, 10, 150, ItemCategory::Potion, StatusType::DP};
+extern const InventoryItem HP_POTION_SMALL;
+extern const InventoryItem HP_POTION_MEDIUM;
+extern const InventoryItem HP_POTION_BIG;
+extern const InventoryItem MP_POTION_SMALL;
+extern const InventoryItem MP_POTION_MEDIUM;
+extern const InventoryItem MP_POTION_BIG;
+extern const InventoryItem AP_POTION_SMALL;
+extern const InventoryItem DP_POTION_SMALL;
+
+extern const std::map<std::string, InventoryItem> potionNameMap;

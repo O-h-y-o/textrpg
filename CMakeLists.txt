@@ -19,10 +19,13 @@ set(SOURCES
     Player/Job/Archor.cpp
     Item/Item.cpp
     Item/Potion/Potion.cpp
+    Item/Potion/PotionInfo.cpp
     Item/Material/Material.cpp
+    Item/Material/MaterialInfo.cpp
     Monster/Monster.cpp
     Monster/MonsterInfo.cpp
     AlchemyWorkshop/WorkshopManagement.cpp
+    AlchemyWorkshop/PotionRecipe.cpp
 )
 
 add_executable(outDebug ${SOURCES})

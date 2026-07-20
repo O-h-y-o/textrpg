@@ -1,6 +1,9 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "PotionRecipe.h"
+
+class PlayerInventory;
 
 class WorkshopManagement {
 private:
@@ -8,9 +11,11 @@ private:
 public:
     WorkshopManagement() {};
 
-    int showWorkshopMenu();
-    void ControlWorkshopMenu(int choice);
+    int showWorkshopMenu(PlayerInventory& inventory);
+    void ControlWorkshopMenu(int choice, PlayerInventory& inventory);
     void showAllRecipes();
-    void searchRecipeByName(std::string target);
+    std::vector<PotionRecipe>::const_iterator 
+    searchRecipeByName(std::string target);
     void searchRecipeByIngredient(std::string target);
+    void craftPotion(PlayerInventory& inventory, const std::string& potionName);
 };
