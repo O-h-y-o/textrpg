@@ -1,54 +1,45 @@
 {
+  "version": "2.0.0",
   "tasks": [
     {
-      "type": "cppbuild",
-      "label": "C/C++: cl.exe 활성 파일 빌드",
-      "command": "cl.exe",
-      "args": [
-        "/Zi",
-        "/EHsc",
-        "/nologo",
-        "/std:c++17",
-        "/Fe${fileDirname}\\${fileBasenameNoExtension}.exe",
-        "${file}"
-      ],
+      "label": "CMake: Configure (Ninja)",
+      "type": "shell",
+      "command": "${workspaceFolder}\\.vscode\\configure-ninja.bat",
       "options": {
-        "cwd": "${fileDirname}"
+        "shell": {
+          "executable": "C:\\Windows\\System32\\cmd.exe",
+          "args": ["/d", "/c"]
+        }
       },
-      "problemMatcher": ["$msCompile"],
-      "detail": "디버거에서 생성된 작업입니다."
+      "problemMatcher": []
     },
     {
-      "type": "cppbuild",
-      "label": "C/C++: textrpg 전체 빌드",
-      "command": "cl.exe",
-      "args": [
-        "/Zi",
-        "/EHsc",
-        "/nologo",
-        "/std:c++17",
-        "/Fe${workspaceFolder}\\textrpg.exe",
-        "${workspaceFolder}\\textrpg.cpp",
-        "${workspaceFolder}\\GameManagement\\*.cpp",
-        "${workspaceFolder}\\Player\\*.cpp",
-        "${workspaceFolder}\\Player\\Job\\*.cpp",
-        "${workspaceFolder}\\Monster\\*.cpp",
-        "${workspaceFolder}\\AlchemyWorkshop\\*.cpp",
-        "${workspaceFolder}\\Inventory\\*.cpp",
-        "${workspaceFolder}\\Item\\*.cpp",
-        "${workspaceFolder}\\Item\\Potion\\*.cpp",
-        "${workspaceFolder}\\Item\\Material\\*.cpp"
-      ],
+      "label": "CMake: Build (Ninja)",
+      "type": "shell",
+      "command": "${workspaceFolder}\\.vscode\\build-ninja.bat",
       "options": {
-        "cwd": "${workspaceFolder}"
+        "shell": {
+          "executable": "C:\\Windows\\System32\\cmd.exe",
+          "args": ["/d", "/c"]
+        }
       },
-      "problemMatcher": ["$msCompile"],
       "group": {
         "kind": "build",
         "isDefault": true
       },
-      "detail": "textrpg 프로젝트의 모든 소스 파일을 컴파일/링크합니다."
+      "problemMatcher": ["$msCompile"]
+    },
+    {
+      "label": "Run (Ninja)",
+      "type": "shell",
+      "command": "${workspaceFolder}\\build-ninja\\outDebug.exe",
+      "options": {
+        "shell": {
+          "executable": "C:\\Windows\\System32\\cmd.exe",
+          "args": ["/d", "/c"]
+        }
+      },
+      "problemMatcher": []
     }
-  ],
-  "version": "2.0.0"
+  ]
 }

@@ -14,3 +14,4 @@
 # 빌드 폴더
 /Debug/
 /Release/
+/build-ninja/
