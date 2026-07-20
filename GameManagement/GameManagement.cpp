@@ -5,15 +5,12 @@
 #include "../GameManagement/GameManagement.h"
 #include "../AlchemyWorkshop/WorkshopManagement.h"
 #include "../Utils/Input.h"
-#include "../Monster/Slime.h"
-#include "../Monster/Goblin.h"
-#include "../Monster/Wolf.h"
+#include "../Monster/Monster.h"
 
 namespace {
-    template<typename T>
-    std::unique_ptr<Monster> spawnMonster(const MonsterInfo& info, const std::string& appearMessage) {
-        std::cout << appearMessage;
-        return std::make_unique<T>(info);
+    std::unique_ptr<Monster> spawnMonster(const MonsterInfo& info) {
+        std::cout << info.name << "이 나타났다!\n";
+        return std::make_unique<Monster>(info);
     }
 }
 
@@ -61,7 +58,7 @@ void GameManagement::ControlMainMenu(int choice) {
     switch (choice) {
         case 1: dungeon(); break;
         case 2: player.getPlayerInventory().showInventory(); break;
-        case 3: wm->showWorkshopMenu(); break;
+        case 3: wm->showWorkshopMenu(player.getPlayerInventory()); break;
         case 4: player.getPlayerStatus().printPlayerStatus(player); break;
         case 0: gameEnd(); break;
         default:
@@ -75,16 +72,26 @@ void GameManagement::dungeon() {
     std::uniform_int_distribution<int> dist(0, 2);
     int r = dist(rng);
     switch (r) {
-        case 0: monster = spawnMonster<Goblin>(GOBLIN_INFO, "고블린이 나타났다!"); break;
-        case 1: monster = spawnMonster<Slime>(SLIME_INFO, "슬라임이 나타났다!"); break;
-        case 2: monster = spawnMonster<Wolf>(WOLF_INFO, "늑대가 나타났다!"); break;
+        case 0: monster = spawnMonster(GOBLIN_INFO); break;
+        case 1: monster = spawnMonster(SLIME_INFO); break;
+        case 2: monster = spawnMonster(WOLF_INFO); break;
         default:
             break;
     }
 
+    int playerChoice;
     while(player.getPlayerStatus().getStatus().hp > 0 && monster->getHP() > 0) {
         std::cout << "\n--- 플레이어 턴 ---\n";
-        player.attack(monster.get());
+
+        std::cout << "1. 공격   2. 인벤토리\n 선택: ";
+        if(!readInput(playerChoice)) continue; 
+        if(playerChoice == 1) {
+            player.attack(monster.get());
+        } else if (playerChoice == 2) {
+            player.getPlayerInventory().showInventory();
+        } else {
+            continue;
+        }
 
         if(monster->getHP() > 0) {
             std::cout << "\n--- 몬스터 턴 ---\n";

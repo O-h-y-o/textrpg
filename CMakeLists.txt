@@ -21,9 +21,7 @@ set(SOURCES
     Item/Potion/Potion.cpp
     Item/Material/Material.cpp
     Monster/Monster.cpp
-    Monster/Goblin.cpp
-    Monster/Slime.cpp
-    Monster/Wolf.cpp
+    Monster/MonsterInfo.cpp
     AlchemyWorkshop/WorkshopManagement.cpp
 )
 

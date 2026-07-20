@@ -1,7 +1,13 @@
 #include "iostream"
 #include "Monster.h"
+#include "../Player/Player.h"
 
 Monster::Monster(MonsterInfo mi) : mi(mi) {};
+
+void Monster::attack(Player& player) {
+    std::cout << mi.attackMessage << "\n";
+    player.takeDamage(mi.ap, mi.name);
+}
 
 void Monster::takeDamage(int damage) {
     int takeDamage = damage - mi.dp;
